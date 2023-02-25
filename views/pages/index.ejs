@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class = "flex bg-dark">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+  <div class="jumbotron">
+    <h1>Want a new job?</h1>
+    <p>Fine whatever you want!</p>
+    <form>
+        <div class="form-row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="job title">
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="location">
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-2">Search</button>
+          </div>
+        </div>
+      </form>
+      <div class="box">
+        <h2>Search Results</h2>
+        <div class="row" id="search-results">
+        </div>
+      </div>
+  </div>
+  
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+
+
+<style>
+
+.box {
+  margin-top: 20px;
+}
+
+#search-results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  width: 100%;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 14px;
+  margin-top: 10px;
+}
+  
+  
+  
+</style>
+
+<script>
+    var results = [  { title: "Result 1", description: "Description 1" },  { title: "Result 2", description: "Description 2" },  { title: "Result 3", description: "Description 3" }];
+
+    // Loop through the search results and populate the container
+    for (var i = 0; i < results.length; i++) {
+        showSearchResults(results[i].title, results[i].description);
+    }
+
+    function showSearchResults(title, description) {
+        var container = document.getElementById("search-results");
+        var result = '<div class="col-md-4"><div class="card"><div class="card-body"><h5 class="card-title">' + title + '</h5><p class="card-text">' + description + '</p></div></div></div>';
+        container.innerHTML += result;
+    }
+</script>
+
+
+
+</html>

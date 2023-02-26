@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <%- include('../partials/head'); %>
+      </head>
+      <body class = "flex bg-dark">
+      
+      <header>
+        <%- include('../partials/header'); %>
+      </header>
+      
+      <main>
+        <div class="jumbotron">
+          <h3>About me</h3>
+          <p><%= text %></p>
+          
+        </div>
+        
+      </main>
+      
+      <footer>
+        <%- include('../partials/footer'); %>
+      </footer>
+      
+    </body>
+    <style>
+        /* CSS styles for the paragraph */
+        .jumbotron {
+
+            padding-bottom: 20%;
+        
+        }
+        p {
+          font-size: 18px;
+          color: #333;
+          line-height: 1.5;
+        }
+      </style>
+</html>

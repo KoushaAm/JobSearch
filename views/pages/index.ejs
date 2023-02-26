@@ -27,7 +27,7 @@
         </div>
       </form>
       <div class="box">
-        <h2>Search Results</h2>
+        <h4>Search Results</h4>
         <div class="row" id="search-results">
         </div>
       </div>
@@ -58,16 +58,24 @@
   width: 100%;
   margin-bottom: 20px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background-color: rgb(31, 30, 30);
+}
+
+.card :hover {
+    box-shadow: 5px 5px 5px rgba(227, 14, 14, 0.2);
 }
 
 .card-title {
   font-size: 18px;
   font-weight: bold;
+  color: white;
 }
 
 .card-text {
   font-size: 14px;
   margin-top: 10px;
+  color: white;
 }
   
   
@@ -75,7 +83,9 @@
 </style>
 
 <script>
-    var results = [  { title: "Result 1", description: "Description 1" },  { title: "Result 2", description: "Description 2" },  { title: "Result 3", description: "Description 3" }];
+
+    // for testing
+    var results = [  { title: "Result 1", description: "Description 1" },  { title: "Result 2", description: "Description 2" },  { title: "Result 3", description: "Description 3" }, { title: "Result 4", description: "Description 4" }];
 
     // Loop through the search results and populate the container
     for (var i = 0; i < results.length; i++) {

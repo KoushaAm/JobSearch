@@ -6,41 +6,47 @@ const app = express();
 
 const axios = require('axios');
 
-const dotenv = require('dotenv');
-dotenv.config({path: './key.env'});
+const Jobs = require('./models/jobs');
 
 
-// load the key
-const key = process.env.API_KEY;
-
-
+let job_results; 
 
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
 
-async function getJobs() {
-    try {
-        response = await axios.get('https://serpapi.com/search.json?engine=google_jobs&q=accountant+vancouver&api_key=' + key + '&hl=en');
-        console.log(response.data);
-        return response.data;
-    } catch (error) {
-        console.error(error);
-    }
-}
-
 //index page 
 app.get('/', function(req, res) {
     try {
         res.render('pages/index');
-        getJobs();
     } catch (error){
         console.log(error);
         res.send("Error while fetching");
     }
     
 });
+
+// wait for form submission
+app.get('/search', async(req, res) => {
+
+    const title = req.query.title;
+    const location = req.query.location;
+
+    // check to see title and location are recieved
+    console.log(title);
+    console.log(location);
+
+    let jobs = await Jobs.collectJobs(title, location);
+    
+    job_results = jobs['jobs_results'];
+    console.log(job_results)
+
+   // res.render('pages/index', {job_results});
+    
+});
+
+
 
 
 // about page
@@ -57,9 +63,9 @@ app.get('/about', function(req, res) {
 
 
 
-
   
 const port = 8080;
 app.listen(port);
 
 console.log("listening to port: http://localhost:"+port);
+

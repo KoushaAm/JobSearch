@@ -19,7 +19,8 @@ app.set('view engine', 'ejs');
 //index page 
 app.get('/', function(req, res) {
     try {
-        res.render('pages/index');
+        const data = [];
+        res.render('pages/index', {data});
     } catch (error){
         console.log(error);
         res.send("Error while fetching");
@@ -30,19 +31,23 @@ app.get('/', function(req, res) {
 // wait for form submission
 app.get('/search', async(req, res) => {
 
-    const title = req.query.title;
-    const location = req.query.location;
+    try {
+        const title = req.query.title;
+        const location = req.query.location;
 
-    // check to see title and location are recieved
-    console.log(title);
-    console.log(location);
+        
 
-    let jobs = await Jobs.collectJobs(title, location);
+        let jobs = await Jobs.collectJobs(title, location);
+        
+        
+        job_results = jobs['jobs_results'];
+
+        res.render('pages/results', {job_results});
+
+    } catch(error) {
+        res.status(500).send("Error while fetching");
+    }
     
-    job_results = jobs['jobs_results'];
-    console.log(job_results)
-
-   // res.render('pages/index', {job_results});
     
 });
 
@@ -68,4 +73,3 @@ const port = 8080;
 app.listen(port);
 
 console.log("listening to port: http://localhost:"+port);
-

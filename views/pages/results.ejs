@@ -1,4 +1,4 @@
-<!-- <link rel="stylesheet" href="results.css"> -->
+<link rel="stylesheet" href="results.css">
 
 <head>
   <%- include('../partials/head'); %>
@@ -12,26 +12,41 @@
   
   <main>
     <%- include('../partials/search'); %>
+    <h1 id = "test"></h1>
 
-
-    <!-- <div class="box">
-      <h4 style="color: aliceblue;">Search Results</h4>
-      <div class="row" id="results-container"></div>
-    </div> -->
 
     <div class="box">
       <div id = "row" class="row">
         
          <% job_results.forEach(function(job) { %> 
+          
             <div class="col-md-4">
               <div class="card">
                 <div class="card-body">
+                  
+                  <div style ="margin-bottom: 10px;">
+                    <image src = "<%= job.thumbnail %>"></image>
+                  </div>
                   <h3 class="card-title"><%= job.title %></h3>
                   <p class="card-text"><%= job.company_name %></p>
                   <p class="card-text"><%= job.location %></p>
+             
+
+                  <button class="expand-button" style="color: antiquewhite;">Details</button>
+                  <div class="job-description" style="display: none;">
+                    <% for(var prop in job.extensions) { %>
+                      <p class="card-text"><%= job.extensions[prop] %></p>
+                    <% } %>
+                  </div>
+
                 </div>
+
+              
               </div>
             </div>
+
+
+            
               
           <% }) %>
         </div 
@@ -39,12 +54,7 @@
       </div> 
       
     </div>
-    
-    <!-- <div class="box">
-      <h4 style = "color: aliceblue;">Search Results</h4>
-        <div class="row" id="search-results"></div>
-    </div> -->
-  
+
   </main>
 
 <footer>
@@ -52,65 +62,68 @@
 </footer>
 
 <style>
-
   .box {
     margin-top: 20px;
     padding: 10px;
   }
-
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  .card:hover {
-    box-shadow: 2px 2px 2px rgba(54, 52, 52, 0.941);
-  }
-
-
-  .card {
-    width: 100%;
-    margin-bottom: 20px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    background-color: rgb(31, 30, 30);
-  }
-
-  .card :hover {
-      box-shadow: 5px 5px 5px rgba(227, 14, 14, 0.2);
-  }
-
-  .card-title {
-    font-size: 18px;
-    font-weight: bold;
+  .expand-button {
+    background-color: #4caf4f00; /* Green */
+    border: none;
     color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
   }
 
-  .card-text {
-    font-size: 14px;
-    margin-top: 10px;
-    color: white;
+  .job-description {
+    color: antiquewhite;
   }
+
+
+
+  .menu-content {
+    width: 300px; 
     
+    z-index: 999; 
+    position: absolute; 
+    transition:position 1s linear;
+    opacity:0;
+  }
+
+  .active{
+      border:1px solid green;
+      transition:position 1s linear;
+      opacity:1;
+  }
 
 
-
-  
 </style>
 
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
 
 
   $(document).ready(function() {
 
-    $.get('/search', function(data) {  // get the data from the server that was triggered by the form submit
       // Access the job results from the JSON data
 
-      const job_results = data.job_results;
-      // find the result container
+      $('.expand-button').click(function() {
+        $(this).siblings('.job-description').toggle();
+      });
+ 
+  });
+
+  // ready for view request
+  
+
+  
+
+
+
+        // find the result container
       // var container = document.getElementById("results-container");
 
 
@@ -130,8 +143,9 @@
   //   });
   //   }, 'json');
   // });
-    });
-  });
-    
-  </script>
+</script>
+  
+
+
+
   

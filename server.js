@@ -9,7 +9,7 @@ const axios = require('axios');
 const Jobs = require('./models/jobs');
 
 
-let job_results; 
+let job_results;
 
 
 // set the view engine to ejs
@@ -35,19 +35,18 @@ app.get('/search', async(req, res) => {
         const title = req.query.title;
         const location = req.query.location;
 
-        
-
         let jobs = await Jobs.collectJobs(title, location);
         
         
         job_results = jobs['jobs_results'];
+
+        // console.log(job_results);
 
         res.render('pages/results', {job_results});
 
     } catch(error) {
         res.status(500).send("Error while fetching");
     }
-    
     
 });
 

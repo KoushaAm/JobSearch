@@ -18,38 +18,34 @@
     <div class="box">
       <div id = "row" class="row">
         
-         <% job_results.forEach(function(job) { %> 
+       <% job_results.forEach(function(job) { %> 
           
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-body">
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
                   
-                  <div style ="margin-bottom: 10px;">
-                    <image src = "<%= job.thumbnail %>"></image>
-                  </div>
-                  <h3 class="card-title"><%= job.title %></h3>
-                  <p class="card-text"><%= job.company_name %></p>
-                  <p class="card-text"><%= job.location %></p>
-             
-
-                  <button class="expand-button" style="color: antiquewhite;">Details</button>
-                  <div class="job-description" style="display: none;">
-                    <% for(var prop in job.extensions) { %>
-                      <p class="card-text"><%= job.extensions[prop] %></p>
-                    <% } %>
-                  </div>
-
+                <div style ="margin-bottom: 10px;">
+                  <image src = "<%= job.thumbnail %>"></image>
                 </div>
-
-              
+                <h3 class="card-title"><%= job.title %></h3>
+                <p class="card-text"><%= job.company_name %></p>
+                <p class="card-text"><%= job.location %></p>
+             
+                <button class="expand-button" style="color: antiquewhite;">Details</button>
+                <div class="job-description" style="display: none;">
+                  <% for(var prop in job.extensions) { %>
+                    <p class="card-text"><%= job.extensions[prop] %></p>
+                  <% } %>
+                </div>
+                <div class="text-right">
+                  <a href="/job/<%= job.job_id %>" class="btn btn-primary">Page</a>
+                </div>
               </div>
             </div>
-
-
             
-              
-          <% }) %>
-        </div 
+          </div >  
+        <% }) %>
+       
         
       </div> 
       
@@ -60,6 +56,19 @@
 <footer>
   <%- include('../partials/footer'); %>
 </footer>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+      // Access the job results from the JSON data
+      $('.expand-button').click(function() {
+        $(this).siblings('.job-description').toggle();
+      });
+ 
+  });
+  
+ 
+</script>
 
 <style>
   .box {
@@ -77,13 +86,9 @@
     margin: 4px 2px;
     cursor: pointer;
   }
-
   .job-description {
     color: antiquewhite;
   }
-
-
-
   .menu-content {
     width: 300px; 
     
@@ -92,60 +97,10 @@
     transition:position 1s linear;
     opacity:0;
   }
-
   .active{
       border:1px solid green;
       transition:position 1s linear;
       opacity:1;
   }
-
-
 </style>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-
-
-  $(document).ready(function() {
-
-      // Access the job results from the JSON data
-
-      $('.expand-button').click(function() {
-        $(this).siblings('.job-description').toggle();
-      });
- 
-  });
-
-  // ready for view request
-  
-
-  
-
-
-
-        // find the result container
-      // var container = document.getElementById("results-container");
-
-
-  //     job_results.forEach(function(job) {
-  //       const jobHtml = `
-  //       <div class="col-md-4">
-  //             <div class="card mb-4">
-  //               <div class="card-body">
-  //                 <h2 class="card-title">${job.title}</h2>
-  //                 <p class="card-text">${job.description}</p>
-  //                 <p class="card-text">${job.location}</p>
-  //               </div>
-  //             </div>
-  //           </div>
-  //       `;
-  //       container.append(jobHtml); // add the job HTML to the container
-  //   });
-  //   }, 'json');
-  // });
-</script>
-  
-
-
-
   

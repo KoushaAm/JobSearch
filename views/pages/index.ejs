@@ -28,11 +28,9 @@
   
   function loadResult (id) {
             $.get('/results', function(data) {
-                console.log(data)
-            
-            correct_language = data.language;
-        });
-      }
+                correct_language = data.language;
+            });
+  }
 
 
   console.log(title);

@@ -1,10 +1,8 @@
-<link rel="stylesheet" href="results.css">
-
 <head>
   <%- include('../partials/head'); %>
 </head>
 
-<body class = "flex bg-dark">
+<body class="flex bg-dark">
 
   <header>
     <%- include('../partials/header'); %>
@@ -12,16 +10,133 @@
   
   <main>
     
+    <div class="container my-4 bg-light p-4 rounded">
+      <div style="display: inline-block;">
+        <img src="<%= job.thumbnail %>" alt="" class="img-fluid rounded mb-3" style = "width: 60px; height: 50px; margin-right: 20px">
+      </div>
+      <div style="display: inline-block;">
+        <h1 class="text-center mb-5"><%= job.title %></h1>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="description">
+            <p id="job-description"><%= desc %></p>
+          </div>
+        </div>
+    
+        <div class="col-md-4">
+          <h2>Job Details</h2>
+          <ul class="list-group mb-3">
+
+            <% for(var index in job.extensions) { %>
+              <li class="list-group-item"><%= job.extensions[index] %></li>
+            <% } %>
+          </ul>
+    
+          <a href= <%= job.related_links[0].link %> class="btn btn-primary btn-lg btn-block">Apply Now</a>
+          <a action="#" class="btn btn-secondary btn-lg btn-block">Save Job</a>
+          <!-- <button id="indent-btn" class="btn btn-secondary btn-sm mb-3">Indent Description</button> -->
+
+        </div>
+      </div>
+    </div>
       
 
   </main>
 
-<footer>
-  <%- include('../partials/footer'); %>
-</footer>
+  <footer>
+    <%- include('../partials/footer'); %>
+  </footer>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
- 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      color: #000000;
+    }
 
+    .bg-dark {
+      background-color: #1a1a1a;
+    }
+
+    .bg-light {
+      background-color: #f8f9fa;
+    }
+
+    .rounded {
+      border-radius: 5px;
+    }
+
+    .p-4 {
+      padding: 1.5rem;
+    }
+
+    .mb-5 {
+      margin-bottom: 3rem;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .list-group-item {
+      background-color: transparent;
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+      background-color: #0069d9;
+      border-color: #0062cc;
+    }
+
+    footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .description {
+      line-height: 1.5;
+    }
+
+    
+  </style>
+
+<script>
+  $(document).ready(function() {
+    // Add a click event listener to the "Indent Description" button
+    // Get the job description paragraph element
+    var desc = $('#job-description');
+
+    // Get the current indentation level (number of spaces at the beginning of the first line)
+    var indentation = desc.text().match(/^\s+/)[0].length;
+
+    // Split the text into lines
+    var lines = desc.text().split('\n');
+
+    // Add the correct number of spaces to the beginning of each line (except the first one)
+    for (var i = 1; i < lines.length; i++) {
+      lines[i] = ' '.repeat(indentation) + lines[i];
+    }
+
+    // Join the lines back together into a single string
+    var indentedText = lines.join('\n');
+
+    // Update the paragraph element with the indented text
+    desc.text(indentedText);
+  });
+</script>
+
+</body>

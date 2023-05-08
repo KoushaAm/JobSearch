@@ -13,9 +13,9 @@ const Jobs = require('./models/jobs');
 let job_results;
 
 
-function getJobById(id) {
+async function getJobById(id) {
     for (let i = 0; i < job_results.length; i++) {
-        console.log(job_results[i]['title']);
+
         if (job_results[i]['job_id'] == id) {
             return job_results[i];
         }
@@ -47,10 +47,10 @@ app.get('/search', async(req, res) => {
 
         let jobs = await Jobs.collectJobs(title, location);
         
-        
-        job_results = jobs['jobs_results'];
+        job_results = jobs['jobs_results']; // job['related_links'][0]['link]
+        console.log("job results: ", job_results[0]);
 
-        // console.log(job_results);
+        
 
         res.render('pages/results', {job_results});
 
@@ -60,22 +60,52 @@ app.get('/search', async(req, res) => {
     
 });
 
+function formatDescription(description) {
+    const BULLET = '•';
+    const INDENTATION = '    '; // four spaces
+    let formattedDescription = '';
+  
+    // Split the description string into an array of lines
+    let lines = description.split('\n');
+  
+    // Loop through each line and check if it starts with a bullet point
+    for (let i = 0; i < lines.length; i++) {
+      let line = lines[i];
+      if (line.trim().startsWith(BULLET)) {
+        // Calculate the level of indentation based on the position of the bullet point
+        let indentLevel = (line.indexOf(BULLET) / 2) + 1;
+        let indentation = INDENTATION.repeat(indentLevel);
+  
+        // Replace the bullet point with the appropriate indentation
+        let formattedLine = line.replace(BULLET, indentation);
+  
+        // Append the formatted line to the formatted description string
+        formattedDescription += formattedLine + '\n';
+      } else {
+        // Append non-bullet lines to the formatted description string
+        formattedDescription += line + '\n';
+      }
+    }
+  
+    return formattedDescription;
+  }
+
+
 app.get('/job/:id', async(req, res) => {
+
     try {
-        // console.log(job_results); // it does have accesss to job rsults (GOOD)
-        // console.log("job to explore", req);
         const id = req.params.id;
-        console.log("ID: ", id);
-        const job = getJobById(id);
-        console.log("JOB: ",  job);
-        res.render('pages/job', {job});
+        let job = await getJobById(id);
+        console.log("description before: ",  job["description"]);
+        let desc = job["description"];
+        console.log("description after: : ", desc);
+        res.render('pages/job', {job, desc});
+        
     } catch (error) {
         console.log(error);
         res.send("Error while fetching");
     }
 });
-
-
 
 
 // about page

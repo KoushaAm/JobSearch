@@ -12,7 +12,7 @@
     
     <div class="container my-4 bg-light p-4 rounded">
       <div style="display: inline-block;">
-        <img src="<%= job.thumbnail %>" alt="" class="img-fluid rounded mb-3" style = "width: 60px; height: 50px; margin-right: 20px">
+        <img src="<%= job.thumbnail %>" alt="" class="img-fluid rounded mb-3" style = "width: 50px; height: 50px; margin-right: 20px">
       </div>
       <div style="display: inline-block;">
         <h1 class="text-center mb-5"><%= job.title %></h1>
@@ -20,7 +20,13 @@
       <div class="row">
         <div class="col-md-8">
           <div class="description">
-            <p id="job-description"><%= desc %></p>
+         
+
+            <% for (let i = 0; i < desc_converted.length; i++) { %>
+              <li style = "padding : 5px" id="job-description"><%= desc_converted[i] %></li>
+            <% } %>
+
+
           </div>
         </div>
     
@@ -35,7 +41,6 @@
     
           <a href= <%= job.related_links[0].link %> class="btn btn-primary btn-lg btn-block">Apply Now</a>
           <a action="#" class="btn btn-secondary btn-lg btn-block">Save Job</a>
-          <!-- <button id="indent-btn" class="btn btn-secondary btn-sm mb-3">Indent Description</button> -->
 
         </div>
       </div>
@@ -97,6 +102,7 @@
     }
 
     footer {
+      height : 40px;
       position: fixed;
       left: 0;
       bottom: 0;
@@ -114,29 +120,5 @@
     
   </style>
 
-<script>
-  $(document).ready(function() {
-    // Add a click event listener to the "Indent Description" button
-    // Get the job description paragraph element
-    var desc = $('#job-description');
-
-    // Get the current indentation level (number of spaces at the beginning of the first line)
-    var indentation = desc.text().match(/^\s+/)[0].length;
-
-    // Split the text into lines
-    var lines = desc.text().split('\n');
-
-    // Add the correct number of spaces to the beginning of each line (except the first one)
-    for (var i = 1; i < lines.length; i++) {
-      lines[i] = ' '.repeat(indentation) + lines[i];
-    }
-
-    // Join the lines back together into a single string
-    var indentedText = lines.join('\n');
-
-    // Update the paragraph element with the indented text
-    desc.text(indentedText);
-  });
-</script>
 
 </body>

@@ -50,56 +50,34 @@ app.get('/search', async(req, res) => {
         job_results = jobs['jobs_results']; // job['related_links'][0]['link]
         console.log("job results: ", job_results[0]);
 
-        
-
         res.render('pages/results', {job_results});
 
     } catch(error) {
+        
         res.status(500).send("Error while fetching");
     }
     
 });
 
-function formatDescription(description) {
-    const BULLET = '•';
-    const INDENTATION = '    '; // four spaces
-    let formattedDescription = '';
-  
-    // Split the description string into an array of lines
-    let lines = description.split('\n');
-  
-    // Loop through each line and check if it starts with a bullet point
-    for (let i = 0; i < lines.length; i++) {
-      let line = lines[i];
-      if (line.trim().startsWith(BULLET)) {
-        // Calculate the level of indentation based on the position of the bullet point
-        let indentLevel = (line.indexOf(BULLET) / 2) + 1;
-        let indentation = INDENTATION.repeat(indentLevel);
-  
-        // Replace the bullet point with the appropriate indentation
-        let formattedLine = line.replace(BULLET, indentation);
-  
-        // Append the formatted line to the formatted description string
-        formattedDescription += formattedLine + '\n';
-      } else {
-        // Append non-bullet lines to the formatted description string
-        formattedDescription += line + '\n';
-      }
+// parse text to list of strings 
+function formatDescription(desc) {
+    try {
+      desc = desc.split("•");
+      return desc; // a list
+    } catch(error) {
+      console.log(error);
     }
-  
-    return formattedDescription;
   }
-
 
 app.get('/job/:id', async(req, res) => {
 
     try {
         const id = req.params.id;
         let job = await getJobById(id);
-        console.log("description before: ",  job["description"]);
         let desc = job["description"];
-        console.log("description after: : ", desc);
-        res.render('pages/job', {job, desc});
+        let desc_converted = formatDescription(desc);
+
+        res.render('pages/job', {job, desc_converted});
         
     } catch (error) {
         console.log(error);

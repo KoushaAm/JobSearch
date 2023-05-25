@@ -1,15 +1,15 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Job search</a>
+    <a class="navbar-brand" href="/index">Job search</a>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/index">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/about">About</a>
+        <a class="nav-link" href="/index">About</a>
       </li>
     </ul>
-    <div class="login-form">
+    <!-- <div class="login-form">
       <form action="/login" method="POST">
         <input type="username" placeholder="username" name="username" required>
         <input type="password" placeholder="Password" name="password" required>
@@ -17,7 +17,8 @@
         <button type="signup">Sign Up</button>
       </form>
       
-    </div>
+    </div> -->
+    <h3>Wellcome <%= user.username %>!</h3>
   </nav>
 
   <style>

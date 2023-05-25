@@ -1,0 +1,47 @@
+{
+    "users": {
+      "username1": {
+        "username": "user1",
+        "password": "password123",
+        "jobs": {
+          "job1": {
+            "title": "",
+            "company_name": "",
+            "location": "",
+            "via": "",
+            "description": "",
+            "job_highlights": [
+              {
+                "items": [
+                  ""
+                ]
+              }
+            ],
+            "related_links": [
+              {
+                "link": "",
+                "text": ""
+              },
+              {
+                "link": "",
+                "text": ""
+              }
+            ],
+            "thumbnail": "",
+            "extensions": [
+              ""
+            ],
+            "detected_extensions": {
+              "posted_at": "",
+              "schedule_type": "",
+              "work_from_home": true
+            },
+            "job_id": ""
+          }
+          
+        }
+      }
+      
+    }
+  }
+  

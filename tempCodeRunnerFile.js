@@ -1,1 +1,1 @@
-        // console.log(job_results);
+    //   Create a new user document in the Realtime Database

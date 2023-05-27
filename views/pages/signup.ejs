@@ -12,8 +12,10 @@
     <div class="form-container">
       <h1>Sign Up</h1>
       <form action="/signup" method="POST">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
+        <input type="text" name="username" placeholder="Username" class = "input-field" required>
+        <input type="password" name="password" placeholder="Password" class = "input-field" required>
+        <input type="location" name="location" placeholder="Location" class = "input-field" required>
+        <input type="profession" name="profession" placeholder="Your profession" class = "input-field" required>
         <button type="submit">Sign Up</button>
       </form>
       <p>Already have an account? <a href="/login">Login</a></p>
@@ -22,7 +24,8 @@
 </body>
 </html>
 <style>
-    body {
+
+body {
   margin: 0;
   padding: 0;
   display: flex;
@@ -52,7 +55,7 @@ h1 {
 }
 
 form input {
-  width: 100%;
+  width: 90%;
   margin-bottom: 15px;
   padding: 10px;
   border: none;
@@ -81,5 +84,4 @@ a {
 a:hover {
   text-decoration: underline;
 }
-
 </style>

@@ -1,4 +1,4 @@
-class Job {
+class job {
     constructor(title, company_name, location, via, description, job_highlights, related_links, thumbnail, extensions, detected_extensions, job_id) {
       this.title = title;
       this.company_name = company_name;
@@ -14,4 +14,4 @@ class Job {
     }
   }
   
-module.exports = Job;
+module.exports = job;

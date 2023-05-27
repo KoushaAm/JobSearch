@@ -15,7 +15,7 @@
         <img src="<%= job.thumbnail %>" alt="" class="img-fluid rounded mb-3" style = "width: 50px; height: 50px; margin-right: 20px">
       </div>
       <div style="display: inline-block;">
-        <h1 class="text-center mb-5"><%= job.title %></h1>
+        <h1 class="text-center mb-5"><%= job_object.title %></h1>
       </div>
       <div class="row">
         <div class="col-md-8">
@@ -23,7 +23,7 @@
          
 
             <% for (let i = 0; i < desc_converted.length; i++) { %>
-              <li style = "padding : 5px" id="job-description"><%= desc_converted[i] %></li>
+              <li style = "padding : 5px" id="job-description"><%= job_object.description[i] %></li>
             <% } %>
 
 
@@ -34,13 +34,13 @@
           <h2>Job Details</h2>
           <ul class="list-group mb-3">
 
-            <% for(var index in job.extensions) { %>
-              <li class="list-group-item"><%= job.extensions[index] %></li>
+            <% for(var index in job_object.extensions) { %>
+              <li class="list-group-item"><%= job_object.extensions[index] %></li>
             <% } %>
           </ul>
     
           <a href= <%= job.related_links[0].link %> class="btn btn-primary btn-lg btn-block">Apply Now</a>
-          <a action="#" class="btn btn-secondary btn-lg btn-block">Save Job</a>
+          <a id="save-job-button" class="btn btn-secondary btn-lg btn-block">Save Job</a>
 
         </div>
       </div>
@@ -53,7 +53,33 @@
     <%- include('../partials/footer'); %>
   </footer>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#save-job-button').click(function() {
+      // Send an AJAX request to the server to save the job
+      $.ajax({
+        url: '/savejob',
+        type: 'POST',
+        data: { 
+          title: '<%= job.title %>',
+          company_name: '<%= job.company_name %>',
+          location: '<%= job.location %>',
+
+          
+        },
+        success: function(response) {
+          // Handle the success response here (e.g., show a success message)
+          console.log('Job saved successfully');
+        },
+        error: function(error) {
+          // Handle the error response here (e.g., show an error message)
+          console.error('Error saving job:', error);
+        }
+      });
+    });
+  });
+</script>
   
   <style>
     body {

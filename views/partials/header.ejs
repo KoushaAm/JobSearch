@@ -1,60 +1,66 @@
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/index">
+    <img src="https://static.thenounproject.com/png/1220588-200.png" style = "width:50px; height:50px;" alt="Job Search Logo">
     <a class="navbar-brand" href="/index">Job search</a>
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/index">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/index">About</a>
-      </li>
-    </ul>
-    <!-- <div class="login-form">
-      <form action="/login" method="POST">
-        <input type="username" placeholder="username" name="username" required>
-        <input type="password" placeholder="Password" name="password" required>
-        <button type="login">Login</button>
-        <button type="signup">Sign Up</button>
-      </form>
-      
-    </div> -->
-    <h3>Wellcome <%= user.username %>!</h3>
-  </nav>
+  </a>
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="/index">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/index">About</a>
+    </li>
+  </ul>
 
-  <style>
- 
+  <!-- Welcome message and signout button -->
+  <div class="welcome-signout">
+    <h3 style = "margin-top: 10px">Welcome <%= user.username %>!</h3>
+    <form action="/myAccount" method="POST">
+      <button name="myAccount" type="submit" class="btn btn-custom-2">My account</button>
+    </form>
+    
+    <form action="/logout" method="POST">
+      <button name="logout" type="submit" class="btn btn-custom-1">Log out</button>
+    </form>
+    
 
-    header input[type="text"],
-    header input[type="password"],
-    header input[type = "username"] {
-      background-color: rgb(203, 205, 206);
-      padding: 10px;
-      border: none;
-      
-    }
+  </div>
+</nav>
 
-    header input[type="password"] {
-      border-radius: 5px;
-    }
+<style>
+  .welcome-signout {
+    display: flex;
+    align-items: center;
+  }
 
-    header input[type="username"] {
-      border-radius: 5px;
-      padding: 10px;
-      border: none;
-    }
+  .welcome-signout h3 {
+    margin-right: 20px;
+  }
 
-    header button[type="login"],
-    header button[type="signup"] {
-      background-color: #1b2128;
-      color: #fff;
-      border-radius: 5px;
-      padding: 10px;
-      border: none;
-      /* cursor: pointer; */
-    }
+  .btn-custom-1 {
+    background-color: #000000;
+    border-color: #d7d4d4;
+    border-radius: 20px;
+    color: #ffffff;
+    margin-top: 10px;
+    margin-left: 10px; /* Add margin to create space */
+  }
 
-   
-  </style>
+  .btn-custom-2 {
+    background-color: #8692b4;
+    border-radius: 20px;
+    color: #ffffff;
+    margin-top: 10px;
+    margin-left: 10px; /* Add margin to create space */
+  }
 
+  .btn-custom-1:hover {
+    background-color: #f0ecec;
+    border-color: #ffffff;
+  }
 
-  
+  .btn-custom-2:hover {
+    background-color: #f0ecec;
+    border-color: #ffffff;
+  }
+</style>

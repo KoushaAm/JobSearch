@@ -67,14 +67,16 @@ Feel free to customize this README file according to your specific project detai
 ## sign up page
 <img width="1440" alt="Screenshot 2023-05-28 at 2 38 50 PM" src="https://github.com/KoushaAm/JobSearch/assets/67440795/f0c4e892-8b84-4663-9443-3664ac9dfa8b">
 
+## profile and saved jobs
+<img width="1440" alt="Screenshot 2023-05-28 at 2 41 01 PM" src="https://github.com/KoushaAm/JobSearch/assets/67440795/85b81a85-6271-49d4-979a-d2943f07453b">
+
+
 ## serach results
 <img width="1440" alt="Screenshot 2023-05-28 at 2 39 43 PM" src="https://github.com/KoushaAm/JobSearch/assets/67440795/a326679b-9c23-4e99-aa57-4be48f5f3502">
 
 ## job page
 <img width="1440" alt="Screenshot 2023-05-28 at 2 40 00 PM" src="https://github.com/KoushaAm/JobSearch/assets/67440795/332a01e8-1685-4ece-a32b-2fceded426f1">
 
-## profile and saved jobs
-<img width="1440" alt="Screenshot 2023-05-28 at 2 41 01 PM" src="https://github.com/KoushaAm/JobSearch/assets/67440795/85b81a85-6271-49d4-979a-d2943f07453b">
 
 
 

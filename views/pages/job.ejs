@@ -57,7 +57,6 @@
 <script>
   $(document).ready(function() {
     $('#save-job-button').click(function() {
-      // Send an AJAX request to the server to save the job
       $.ajax({
         url: '/savejob',
         type: 'POST',
@@ -69,11 +68,9 @@
           
         },
         success: function(response) {
-          // Handle the success response here (e.g., show a success message)
-          console.log('Job saved successfully');
+          alert("Job saved!");
         },
         error: function(error) {
-          // Handle the error response here (e.g., show an error message)
           console.error('Error saving job:', error);
         }
       });

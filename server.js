@@ -71,9 +71,15 @@ function parseJobtoObject(job) {
         } else {
             thumbnail = job['thumbnail'];
         }
+        // if job title contains "/" replace it with "-"
+        // for some reason parsing the titles containing "/" in database  generates problem while fetching
+        if (job['title'].includes("/")) {
+            job['title'] = job['title'].replace("/", " ");
+        }
 
+        // job['job_id'] = job['job_id'].substring(job['job_id'].length - 10);
         job_object = new Job(job['title'], job['company_name'], job['location'], job['via'], formatDescription(job['description']),
-         job['job_highlights'], job['related_links'], thumbnail, job['extensions'], job['detected_extensions'], "123")
+         job['job_highlights'], job['related_links'], thumbnail, job['extensions'], job['detected_extensions'], job['job_id'])
         return job_object;
 
     } catch(error) {
@@ -131,6 +137,10 @@ app.get('/search', async(req, res) => {
         let jobs = await Jobs.collectJobs(title, location);
         
         job_results = jobs['jobs_results']; // job['related_links'][0]['link]
+        // for every job in job results only keeep the last 20 characters of the job_id
+        for (let i = 0; i < job_results.length; i++) {
+            job_results[i]['job_id'] = job_results[i]['job_id'].substring(job_results[i]['job_id'].length - 20);
+        }
         //console.log("job results: ", job_results[5]);
 
         res.render('pages/results', {job_results, user});
@@ -300,12 +310,14 @@ app.post('/logout', (req, res) => {
 
 app.post('/savejob', async (req, res) => {
   try {
-    const title = req.body.title; // Get the job title from the request body
-    const company_name = req.body.company_name; // Get the company name from the request body
-    const location = req.body.location; // Get the location from the request body
+    const title = req.body.title; 
+    const company_name = req.body.company_name; 
+    const location = req.body.location; 
 
-    const newJob = lookUpInJobThread(title, company_name, location); // Get the job object from the job thread
-    const userRef = db.ref('Users/' + user.username); // Reference to the current user in the database
+    // Get the job object from the job thread
+    const newJob = lookUpInJobThread(title, company_name, location); 
+    // Reference to the current user in the database
+    const userRef = db.ref('Users/' + user.username); 
 
     // Fetch the user's current list of saved jobs
     const userSnapshot = await userRef.once('value');
@@ -314,7 +326,8 @@ app.post('/savejob', async (req, res) => {
     // If the user exists in the database
     if (userData) {
       const jobsListRef = userRef.child('jobs'); // Reference to the jobs list of the user
-      const jobRef = jobsListRef.child(title); // Reference to the specific job in the jobs list
+      
+      const jobRef = jobsListRef.child(newJob.job_id); // Reference to the specific job in the jobs list
 
       // Create a new job object with the desired properties
       const jobData = {
@@ -332,16 +345,16 @@ app.post('/savejob', async (req, res) => {
 
       };
 
-      // Set the new job reference with the title as the key to the jobs list
       await jobRef.set(jobData);
 
-      res.sendStatus(200); // Send a success response
+      res.sendStatus(200); 
     } else {
-      res.sendStatus(404); // Send a not found response if the user doesn't exist in the database
+      res.sendStatus(404); 
     }
   } catch (error) {
     console.error('Error saving job:', error);
-    res.sendStatus(500); // Send an internal server error response
+    // Send an internal server error response
+    res.sendStatus(500); 
   }
 });
 
@@ -355,20 +368,41 @@ app.post('/myAccount', async (req, res) => {
         const userData = userSnapshot.val();
         // get the jobs
         const jobs = userData.jobs;
-        //console.log("jobs: ", jobs);
-        console.log(typeof(jobs));
+        if (jobs)  {
+            const jobArray = Object.values(jobs);
+            
+            res.render('pages/myAccount', {user, jobArray});
+        } else {
+            const jobArray = [];
+            res.render('pages/myAccount', {user, jobArray});
+        }
         
-
-        res.render('pages/myAccount', {user, jobs});
 
     } catch (error) {
         console.log(error);
         res.send("error while fetching");
     }
 });
+
+app.post('/delete-job', async (req, res) => {
+    try {
+        const jobId = req.body.jobId;
+        console.log("to delete job: ", jobId);
+        const userRef = db.ref('Users/' + user.username); 
+        const jobsListRef = userRef.child('jobs'); 
+        const jobRef = jobsListRef.child(jobId); 
+
+        // Remove the job from the database
+        await jobRef.remove();
+        // sucess
+        res.sendStatus(200); 
+    } catch (error) {
+        console.error('Error deleting job:', error);
+        res.sendStatus(500); 
+    }
+});
   
 
-  
 
 
 

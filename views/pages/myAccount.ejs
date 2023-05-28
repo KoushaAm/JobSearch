@@ -9,43 +9,47 @@
       <%- include('../partials/header'); %>
     </header>
     <main class="content">
-      <div class="container">
+      <div class="container" style="margin-top: 40px;">
         <div class="row">
           <div class="col-md-6">
             <h2>User Profile</h2>
             <p>Welcome to your profile page!</p>
             <ul>
-              <li style = "font-size: 40px"><strong><%= user.username%></strong></li>
-              <li style = "font-size: 35px"><%= user.location %></li>
-              <li style = "font-size: 35px"><%= user.profession %></li>
+              <li style="font-size: 40px"><strong><%= user.username%></strong></li>
+              <li style="font-size: 35px"><%= user.location %></li>
+              <li style="font-size: 35px"><%= user.profession %></li>
             </ul>
           </div>
           <div class="col-md-6">
             <h2>Saved Jobs</h2>
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Software Engineer</h5>
-                <p class="card-text">Vancouver, BC</p>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Software Developer</h5>
-                <p class="card-text">Vancouver, BC</p>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Software System Engineer</h5>
-                <p class="card-text">Calgary, AB</p>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">QA Engineer</h5>
-                <p class="card-text">Toronto, ON</p>
-              </div>
-            </div>
+              <% if (jobArray.length>0) { %>
+                <% jobArray.forEach(function(job) { %>
+                  <div class="col-md-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <div style="margin-bottom: 10px;">
+                          <image src="<%= job.thumbnail %>"></image>
+                        </div>
+                        <h3 class="card-title"><%= job.title %></h3>
+                        <p class="card-text"><%= job.company_name %></p>
+                        <p class="card-text"><%= job.location %></p>
+                        <!-- <button class="expand-button" style="color: antiquewhite;">Details</button> -->
+                        <div class="job-description" style="display: none;">
+                          <% for (var prop in job.extensions) { %>
+                            <p class="card-text"><%= job.extensions[prop] %></p>
+                          <% } %>
+                        </div>
+                        <div class="text-right">
+                          <a href="/job/<%= job.job_id %>" class="btn btn-primary">Learn more</a>
+                          <button class="btn btn-danger delete-job" data-job-id="<%= job.job_id %>">Delete</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% }) %>
+            <% } else { %>
+              <h5 style = "color:rgb(164, 159, 159)">You have not saved any jobs yet.</h5>
+            <% } %>
           </div>
         </div>
       </div>
@@ -57,24 +61,37 @@
   
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+  <script>
+    $(document).ready(function() {
+      $(".delete-job").on("click", function() {
+        var jobId = $(this).data("job-id");
+        $.post("/delete-job", { jobId: jobId}, function() {
+          // Callback function after successful deletion
+          alert("Job deleted!");
+          location.reload(); // Refresh the page after deletion
+        });
+      });
+    });
+  </script>
   <style>
-
-    main{
-        background-color: black;
+    main {
+      background-color: black;
     }
+
     h1 {
       border-radius: 15px;
-      color : "white";
+      color: white;
       text-shadow: 5px 5px 15px rgb(164, 159, 159), -5px -5px 50px rgb(172, 170, 170);
     }
 
-    p,li, h2{
-        color:#ffffff;
+    p,
+    li,
+    h2 {
+      color: #ffffff;
     }
 
     li {
-        font-size: 30px;
+      font-size: 30px;
     }
 
     .container {
@@ -151,12 +168,11 @@
       padding: 20px;
       text-align: center;
     }
+
     .container ul {
       list-style: none;
       padding-left: 0;
     }
-
-    
   </style>
 </body>
 </html>

@@ -39,8 +39,8 @@
             <% } %>
           </ul>
     
-          <a href= <%= job.related_links[0].link %> class="btn btn-primary btn-lg btn-block">Apply Now</a>
-          <a id="save-job-button" class="btn btn-secondary btn-lg btn-block">Save Job</a>
+          <a href= <%= job.related_links[0].link %> class="btn btn-primary-1 btn-lg btn-block"><strong>Apply Now</strong></a>
+          <a id="save-job-button" class="btn btn-primary-2 btn-lg btn-block"><strong>Save Job</strong></a>
 
         </div>
       </div>
@@ -94,11 +94,12 @@
     }
 
     .rounded {
-      border-radius: 5px;
+      border-radius: 10px;
     }
 
     .p-4 {
       padding: 1.5rem;
+      font-size: 20px;
     }
 
     .mb-5 {
@@ -114,14 +115,32 @@
       border: none;
     }
 
-    .btn-primary {
-      background-color: #007bff;
-      border-color: #007bff;
+    .btn-primary-1 {
+      background-color: #06315f;
+      border-color: #06315f;
+      color : white;
+      border-radius: 20px;
     }
 
-    .btn-primary:hover {
-      background-color: #0069d9;
-      border-color: #0062cc;
+    .btn-primary-2 {
+      background-color: #3a5b39;
+      border-color: #3a5b39;
+      color: white;
+      border-radius: 20px;
+      
+    }
+
+    .btn-primary-1:hover {
+      background-color: #8badd1;
+      border-color: #8badd1;
+      
+      border-radius: 20px;
+    }
+
+    .btn-primary-2:hover {
+      background-color: #82aa81;
+      border-color: #82aa81;
+      border-radius: 20px;
     }
 
     footer {

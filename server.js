@@ -227,10 +227,10 @@ app.post("/login", async (req, res) => {
 
             const storedPassword = userData.password;
             const storedLocation = userData.location;
-            console.log("stored location: ", storedLocation);
+            // console.log("stored location: ", storedLocation);
 
             const storedProfession = userData.profession;
-            console.log("stored profession: ", storedProfession);
+            // console.log("stored profession: ", storedProfession);
 
             if (password === storedPassword) {
                 user = new User(username, password, storedProfession, storedLocation);
@@ -269,8 +269,8 @@ app.post("/signup", async (req, res) => {
             location = "";
         }
     
-        console.log("Username:", username);
-        console.log("Password:", password);
+        // console.log("Username:", username);
+        // console.log("Password:", password);
 
         const userSnapshot = await db.ref('Users/' + username).once('value');
         const userData = userSnapshot.val();
@@ -289,7 +289,7 @@ app.post("/signup", async (req, res) => {
                 jobs: []
             });
 
-            console.log("new user added to database");
+            // console.log("new user added to database");
         
 
             res.render('pages/index', {user});
@@ -387,7 +387,7 @@ app.post('/myAccount', async (req, res) => {
 app.post('/delete-job', async (req, res) => {
     try {
         const jobId = req.body.jobId;
-        console.log("to delete job: ", jobId);
+        // console.log("to delete job: ", jobId);
         const userRef = db.ref('Users/' + user.username); 
         const jobsListRef = userRef.child('jobs'); 
         const jobRef = jobsListRef.child(jobId); 

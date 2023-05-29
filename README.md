@@ -52,17 +52,10 @@ External APIs: Job search API (e.g., Indeed, LinkedIn) for fetching job listings
 5. Use the navigation menu to explore other pages such as the homepage, about page, and user profile page.
 6. Log out of your account when finished.
 
-## Contributing
-Contributions to the Job Search Website are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request. Ensure that your code follows the established coding style and conventions.
-
-## License
-The Job Search Website is open-source and released under the MIT License.
 
 ## Acknowledgements
 The Job Search Website was developed as a project for learning purposes.
-Thanks to the developers and contributors of the libraries, frameworks, and APIs used in this project.
 
-Feel free to customize this README file according to your specific project details and requirements. Provide instructions for setting up the project, explain the features and technologies used, and include any other relevant information to help users and contributors understand your website better.
 
 ## sign up page
 <img width="1440" alt="Screenshot 2023-05-28 at 2 38 50 PM" src="https://github.com/KoushaAm/JobSearch/assets/67440795/f0c4e892-8b84-4663-9443-3664ac9dfa8b">

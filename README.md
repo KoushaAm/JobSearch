@@ -52,27 +52,24 @@ External APIs: Job search API (e.g., Indeed, LinkedIn) for fetching job listings
 5. Use the navigation menu to explore other pages such as the homepage, about page, and user profile page.
 6. Log out of your account when finished.
 
-## Contributing
-Contributions to the Job Search Website are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request. Ensure that your code follows the established coding style and conventions.
-
-## License
-The Job Search Website is open-source and released under the MIT License.
 
 ## Acknowledgements
 The Job Search Website was developed as a project for learning purposes.
-Thanks to the developers and contributors of the libraries, frameworks, and APIs used in this project.
 
-Feel free to customize this README file according to your specific project details and requirements. Provide instructions for setting up the project, explain the features and technologies used, and include any other relevant information to help users and contributors understand your website better.
 
-<img width="1440" alt="Screenshot 2023-05-26 at 6 04 09 PM" src="https://github.com/KoushaAm/JobSearch/assets/67440795/36230a79-c837-467e-a57f-6f9ea969f116">
+## sign up page
+<img width="1440" alt="Screenshot 2023-05-28 at 2 38 50 PM" src="https://github.com/KoushaAm/JobSearch/assets/67440795/f0c4e892-8b84-4663-9443-3664ac9dfa8b">
 
-<img width="1274" alt="Screenshot 2023-05-25 at 1 37 06 PM" src="https://github.com/KoushaAm/JobSearch/assets/67440795/05db9f4f-4bf1-433d-8d27-db2ac141aa86">
+## profile and saved jobs
+<img width="1440" alt="Screenshot 2023-05-28 at 2 41 01 PM" src="https://github.com/KoushaAm/JobSearch/assets/67440795/85b81a85-6271-49d4-979a-d2943f07453b">
 
-<img width="1440" alt="Screenshot 2023-05-26 at 6 06 29 PM" src="https://github.com/KoushaAm/JobSearch/assets/67440795/6d3db556-5c90-4b7b-97af-b04e9e9d2755">
 
-<img width="1440" alt="Screenshot 2023-05-25 at 1 38 54 PM" src="https://github.com/KoushaAm/JobSearch/assets/67440795/36e93951-bb95-46c2-8b96-c6cf4281d1ea">
+## serach results
+<img width="1440" alt="Screenshot 2023-05-28 at 2 39 43 PM" src="https://github.com/KoushaAm/JobSearch/assets/67440795/a326679b-9c23-4e99-aa57-4be48f5f3502">
 
-<img width="1440" alt="Screenshot 2023-05-08 at 8 36 14 PM" src="https://user-images.githubusercontent.com/67440795/236987529-c5270a30-5e03-42f4-9d43-b9c04addcf43.png">
+## job page
+<img width="1440" alt="Screenshot 2023-05-28 at 2 40 00 PM" src="https://github.com/KoushaAm/JobSearch/assets/67440795/332a01e8-1685-4ece-a32b-2fceded426f1">
+
 
 
 

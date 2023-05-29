@@ -30,9 +30,11 @@ let job_thread = [];
 
 // get job by id FROM THE FETCHED JOB_RESULTS
 async function getJobById(id) {
+
     for (let i = 0; i < job_results.length; i++) {
 
         if (job_results[i]['job_id'] == id) {
+            console.log(job_results[i]['title']);
             return job_results[i];
         }
     }
@@ -136,14 +138,19 @@ app.get('/search', async(req, res) => {
 
         let jobs = await Jobs.collectJobs(title, location);
         
-        job_results = jobs['jobs_results']; // job['related_links'][0]['link]
-        // for every job in job results only keeep the last 20 characters of the job_id
+        job_results = jobs['jobs_results']; 
+        // console.log(" ")
         for (let i = 0; i < job_results.length; i++) {
-            job_results[i]['job_id'] = job_results[i]['job_id'].substring(job_results[i]['job_id'].length - 20);
+            job_results[i]['job_id'] = job_results[i]['job_id'].substring(40, 100);
         }
+        
+
+        // for(let x= 0; x < job_results.length; x++) {
+        //     console.log(job_results[x]['job_id']);
+        // }
         //console.log("job results: ", job_results[5]);
 
-        res.render('pages/results', {job_results, user});
+        res.render('pages/results', {job_results, user, title, location});
 
     } catch(error) {
         
@@ -155,15 +162,17 @@ app.get('/search', async(req, res) => {
 
 
 app.get('/job/:id', async(req, res) => {
-
     try {
         const id = req.params.id;
+        console.log("id: ", id)
         let job = await getJobById(id);
+        console.log("job: ", job['title']);        
         let desc = job["description"];
         let desc_converted = formatDescription(desc);
         job_object = await parseJobtoObject(job);
         //await console.log("job object: ", job_object);
         job_thread.push(job_object);
+        // console.log("job thread: ", job_thread);
 
         res.render('pages/job', {job, desc_converted, user, job_object});
         
@@ -191,6 +200,7 @@ app.get('/about', function(req, res) {
 // Initialize Firebase Admin SDK using your service account credentials
 const admin = require('firebase-admin');
 const serviceAccount = require('./serviceAccountKey.json');
+const job = require('./models/job');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),

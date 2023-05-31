@@ -24,6 +24,8 @@ Logged-in users can save jobs to their account for easy access later.
 ### Apply Now
 Users can directly navigate to the application page of a job listing by clicking on the "Apply Now" button.
 
+### to be added soon : user search according to their proession, location or name
+
 ### Responsive Design
 The website is designed to be responsive and optimized for various screen sizes and devices.
 

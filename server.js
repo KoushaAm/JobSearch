@@ -29,13 +29,33 @@ let job_thread = [];
 
 
 // get job by id FROM THE FETCHED JOB_RESULTS
-async function getJobById(id) {
+async function getJobById(id, results) {
 
-    for (let i = 0; i < job_results.length; i++) {
+    // get the saved jobs in data base
+    const userSnapshot = await db.ref('Users/' + user.username).once('value');
+    const userData = userSnapshot.val();
+    // get the jobs
+    const jobs = userData.jobs;
+    if (jobs)  {
+        const jobArray = Object.values(jobs);
+        console.log("job array: ", jobArray);
+        // join the job results with the saved jobs
+        if (results != undefined) {
+            results = results.concat(jobArray);
+            console.log("job results: ", job_results);
+        } else [
+            results = jobArray
+        ]
+    }
 
-        if (job_results[i]['job_id'] == id) {
-            console.log(job_results[i]['title']);
-            return job_results[i];
+
+
+
+    for (let i = 0; i < results.length; i++) {
+
+        if (results[i]['job_id'] == id) {
+            console.log(results[i]['title']);
+            return results[i];
         }
     }
 }
@@ -165,7 +185,7 @@ app.get('/job/:id', async(req, res) => {
     try {
         const id = req.params.id;
         console.log("id: ", id)
-        let job = await getJobById(id);
+        let job = await getJobById(id, job_results);
         console.log("job: ", job['title']);        
         let desc = job["description"];
         let desc_converted = formatDescription(desc);

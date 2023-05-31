@@ -10,7 +10,7 @@ The Job Search Website is a web application that allows users to search for job 
 Users can sign up for an account or log in to an existing account to access personalized features.
 
 ### Job Search
-Users can enter job titles and locations to search for relevant job listings.
+Users can enter job titles and locations to search for relevant job listings. I plan to increase the number of results in the future.
 
 ### Job Listings
 Users can view a list of job results matching their search criteria, including job titles, company names, and locations.

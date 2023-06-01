@@ -97,7 +97,7 @@ function parseJobtoObject(job) {
     try {
 
         // if thumbnail is not available, use a default one
-        if (job['thumbnail'] == undefined) {
+        if (!job['thumbnail']) {
             thumbnail = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fstatic.thenounproject.com%2Fpng%2F5015922-200.png&tbnid=zaqvSuzXdFz7aM&vet=12ahUKEwiZ1ZeX6JP_AhVkMDQIHd0lC0MQMygPegUIARD8AQ..i&imgrefurl=https%3A%2F%2Fthenounproject.com%2Ficon%2Fjob-5015922%2F&docid=NjTANQ3sNNjONM&w=200&h=200&q=job%20icon%20png&ved=2ahUKEwiZ1ZeX6JP_AhVkMDQIHd0lC0MQMygPegUIARD8AQ";
         } else {
             thumbnail = job['thumbnail'];
@@ -157,7 +157,7 @@ app.get('/search', async(req, res) => {
         const title = req.query.title;
         const location = req.query.location;
 
-        if (title == undefined) {
+        if (title == "undefined") {
             title = user.profession;
         }
         if (location == undefined) {

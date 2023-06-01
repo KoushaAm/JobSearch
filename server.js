@@ -72,13 +72,22 @@ function lookUpInJobThread(title, company_name, location) {
 
 // parse text to list of strings 
 function formatDescription(desc) {
-    try {
-      desc = desc.split("•");
-      return desc; // a list
-    } catch(error) {
-      console.log(error);
-      return ["description not available"]
+    // console.log("description: ", desc);
+
+    // check if the desc is already processed into a list
+    if (typeof desc == "string") {
+        try {
+            desc = desc.split("•");
+            return desc; // a list
+          } catch(error) {
+            console.log(error);
+            return ["description not available"]
+          }
+    } else {
+        return desc; 
     }
+
+    
 }
 
 

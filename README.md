@@ -1,4 +1,4 @@
-# JobSearch
+# Job Search Website
 
 ## serach results
 <img width="1440" alt="Screenshot 2023-05-28 at 2 39 43 PM" src="https://github.com/KoushaAm/JobSearch/assets/67440795/a326679b-9c23-4e99-aa57-4be48f5f3502">
